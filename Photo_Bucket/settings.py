@@ -76,7 +76,6 @@ WSGI_APPLICATION = 'Photo_Bucket.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'NAME': 'photos_bucket',
@@ -87,6 +86,7 @@ DATABASES = {
         'HOST': 'localhost',
     }
 }
+
 
 
 # Password validation

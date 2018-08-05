@@ -1,0 +1,159 @@
+{% load staticfiles %}
+<html>
+	<title>Mytagger </title>
+    <head>
+    <link href="/static/home.css" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+<script src="/static/js/home.js"></script>
+<script>
+        $(document).ready(function() {
+          $('#selectall1').click(function() { 
+              $(this.form.elements).filter(':checkbox').prop('checked', this.checked);
+            });
+});
+   
+    
+    $(document).ready(function() {
+    $('.mycheckbox').change(function() {
+        $('.mycheckboxdiv').toggle();
+    });
+});
+  
+  $(document).ready(function() {
+    $('#img1').change(function() {
+        $('#toption').toggle();
+    });
+});
+      
+</script>
+    
+</script>
+
+
+
+        
+            
+<!------ Include the above in your HEAD tag ---------->
+    </head>
+    <body>
+
+{#        #}
+{#<div id="mySidenav" class="sidenav">#}
+{#  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>#}
+{#  <a href="#">About</a>#}
+{#  <a href="#">Services</a>#}
+{#  <a href="#">Clients</a>#}
+{#  <a href="#">Contact</a>#}
+{#</div>#}
+
+         <nav class="navbar navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+
+    </div>
+    <div class="navbar-header">
+        
+		<div>
+							<center><img class="navbar-brand" src="{%  static "img/Photobucket_logo.png" %}" style="width:300px; height:60px;"></center>
+						</div>	
+						
+    </div>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home  {{ user.username }}</a></li>
+    </ul>
+      <ul class="nav navbar-nav navbar-right" style="margin-right:10px;">
+      
+           <div class="dropdown" style="padding-left:50px; padding-right:50px;">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+      
+          <span style="font-size:25px; " class="glyphicon glyphicon-user"></span> User 
+      
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+		<div class="form-group">
+	 
+			<center><img style="border-radius:50%; width:60px; height:70px;" class="img-responsive"  src="/static/img/PhotoBucket_logo.png" alt="photo" width="auto" height="130" style="margin:10px;" > </center>
+		</div>
+
+
+
+	<h2 style="text-align:center">{{user.username }}</h2>
+	  <li><a href="#">Profile</a></li>
+      <li><a href="logout">SignOut</a></li>
+        <br>
+        <br>
+        <br>
+    </ul>
+  </div>
+    </ul>
+
+
+    <form class="navbar-form navbar-left" method="get" action="getImage" onsubmit="return searchTag.value!=''">
+                {% csrf_token %}
+
+
+      <div class="form-group">
+        <input name="searchTag"  style="padding-left:150px;padding-right:150px;padding-top:5px;background-color: transparent; font-size:20px; "  type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Search Image</button>
+    </form>
+  </div>
+
+<form action="uploadImage" id="form" class="navbar-form navbar-left"  method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+      <input type="file" class="btn btn-md btn-primary" id="file"  name="image_file">
+</form>
+</nav>
+
+
+
+ <script type="text/javascript">
+	document.getElementById("file").onchange = function() {
+		//alert("hello");
+    document.getElementById("form").submit();
+};
+</script>
+        <br />
+        <br />
+    <br />
+        <div class="container">
+        <div class="row">
+        <div class="card col-3">
+        {% for a in getImage_id_List %}
+            <a href="/static/user_images/{{a.image_id}}">
+            <img src="/static/user_images/{{a.image_id}}" height="200" width="200" />
+            </a>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+
+
+<hr>        
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+     
+
+    </body>
+</html> 
+    

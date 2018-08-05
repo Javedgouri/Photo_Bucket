@@ -21,6 +21,8 @@ admin.site.site_header = 'Photo Bucket administration'
 
 urlpatterns = [
     path('', include('ImageTagging.urls')),
-    path('user/', include('user.urls')),
+    path('auth/', include('user.urls')),
     path('admin/', admin.site.urls),
+
+
 ]
